@@ -1,0 +1,69 @@
+package lesueur.android.game.flowfree;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+import lesueur.android.game.flowfree.R;
+
+public class FFActivity extends Activity 
+{
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        FFApplication app ;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        TextView tv = (TextView)(this.findViewById(R.id.shaked));
+        tv.setText("") ;
+        app = ((FFApplication)(this.getApplicationContext())) ;
+        app.setTv(tv);
+        
+        
+    }
+        
+    @Override
+    protected void onResume() 
+    {
+        super.onResume();
+       // FFApplication app = ((FFApplication)(this.getApplicationContext())) ;
+       
+       
+    }
+
+    @Override
+    protected void onPause() 
+    {
+        super.onPause();
+        //FFApplication app = ((FFApplication)(this.getApplicationContext())) ;
+        
+    }
+
+   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) 
+    {
+        //Intent serverIntent ;
+        //FFApplication app = ((FFApplication)(getApplicationContext())) ;
+        switch (item.getItemId()) 
+        {
+        case R.id.switchViewMode:
+            return true; 
+        case R.id.switchSearchMode:
+            return true;             
+        }
+        return false;
+    }
+    
+}
