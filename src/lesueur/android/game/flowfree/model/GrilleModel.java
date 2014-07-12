@@ -2,13 +2,13 @@ package lesueur.android.game.flowfree.model;
 import java.util.ArrayList;
 
 
-public class Grille {
+public class GrilleModel {
 
 	private ArrayList<ArrayList<Case>> cases = new ArrayList<ArrayList<Case>>() ;
 	private int largeur = 0 ;
 	private int hauteur = 0 ;
 	
-	public Grille(int largeur, int hauteur)
+	public GrilleModel(int largeur, int hauteur)
 	{
 		this.largeur = largeur ;
 		this.hauteur = hauteur ;
@@ -19,6 +19,12 @@ public class Grille {
 				this.setCase(i, j);
 			}
 		}
+	}
+	public int getLargeur() {
+		return largeur;
+	}
+	public int getHauteur() {
+		return hauteur;
 	}
 	private void setCase(int ligne, int colonne, int color)
 	{
@@ -114,8 +120,8 @@ public class Grille {
 		return this.getCaseAt(c.getI() , c.getJ() - 1) ;
 	}
 
-	public Grille copy() {
-		Grille g = new Grille(largeur, hauteur) ;
+	public GrilleModel copy() {
+		GrilleModel g = new GrilleModel(largeur, hauteur) ;
 		for (int i = 0 ; i < largeur ; i++)
 		{
 			for (int j = 0 ; j < hauteur ; j++)
@@ -136,7 +142,7 @@ public class Grille {
 		}
 		return true;
 	}	
-	public boolean equals(Grille g)
+	public boolean equals(GrilleModel g)
 	{
 		for (int i = 0 ; i < largeur ; i++)
 		{

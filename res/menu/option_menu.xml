@@ -14,13 +14,12 @@
      limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/switchViewMode"
+    <item android:id="@+id/reset"
           android:icon="@android:drawable/ic_menu_mapmode"
-          android:title="View mode"
+          android:title="Reset grid"
           android:showAsAction="ifRoom|withText" />
-    <item android:id="@+id/switchSearchMode"
-          android:icon="@android:drawable/ic_menu_search"
-          android:title="Activate / desactivate search mode"
-          android:showAsAction="ifRoom|withText" />    
-
+    <item android:id="@+id/help"
+          android:icon="@android:drawable/ic_menu_mapmode"
+          android:title="Help"
+          android:showAsAction="ifRoom|withText" />
 </menu>

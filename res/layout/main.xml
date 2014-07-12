@@ -8,7 +8,6 @@
         android:id="@+id/shaked"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="No shake"
     />
           
     <lesueur.android.game.flowfree.ihm.SurfaceViewFF 

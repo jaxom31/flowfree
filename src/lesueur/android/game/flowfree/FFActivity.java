@@ -14,10 +14,10 @@ public class FFActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+
         FFApplication app ;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
         TextView tv = (TextView)(this.findViewById(R.id.shaked));
         tv.setText("") ;
         app = ((FFApplication)(this.getApplicationContext())) ;
@@ -55,13 +55,17 @@ public class FFActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) 
     {
         //Intent serverIntent ;
-        //FFApplication app = ((FFApplication)(getApplicationContext())) ;
+        FFApplication app = ((FFApplication)(getApplicationContext())) ;
         switch (item.getItemId()) 
         {
-        case R.id.switchViewMode:
+        case R.id.reset:
+        	app.getTv().setText("") ;
+        	app.setNewGrille() ;
             return true; 
-        case R.id.switchSearchMode:
-            return true;             
+        case R.id.help:
+        	app.getTv().setText("help 1") ;
+        	app.getHelp() ;
+            return true;                
         }
         return false;
     }

@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -34,7 +33,7 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
     private int cellHeight = 20 ;
     private ArrayList<Cell> selected = new ArrayList<Cell>() ;
     private ArrayList<Point> points = new ArrayList<Point>() ;
-    private ArrayList<ArrayList<Cell>> paths = new ArrayList<ArrayList<Cell>>() ;
+    
     private FFApplication app = ((FFApplication)(this.getContext().getApplicationContext())) ;
     private boolean modeDelete = false;
     
@@ -46,11 +45,11 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
     	{
     		copy.add(c) ;
     	}
-    	paths.add(copy) ;
+    	app.getGrille().getPaths().add(copy) ;
     }
     private ArrayList<Cell> isPathExistForThisVal(String val)
     {
-    	for(ArrayList<Cell> path : this.paths)
+    	for(ArrayList<Cell> path : app.getGrille().getPaths())
     	{
     		if (path.get(0).getValue().equals(val))
     			return path ;
@@ -67,7 +66,7 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
     	{
     		toDelete.get(i).setValue(' ') ;
     	}
-    	this.paths.remove(toDelete) ;
+    	app.getGrille().getPaths().remove(toDelete) ;
     }
     private int getColorFromFirstPoint()
     {
@@ -237,14 +236,17 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
                 	if (!modeDelete)
                 	{
 	                    Cell c = this.getCellAt(touched_x, touched_y) ;
-	                    if ((c.getValue().equals(" ") || ((c.getValue().equals(selected.get(0).getValue())))))
+	                    if (c != null)
 	                    {
-		                    if (this.canSelectNextCell(c))
+		                    if ((c.getValue().equals(" ") || ((c.getValue().equals(selected.get(0).getValue())))))
 		                    {
-		                        if (this.addCell(c,(int)touched_x,(int)touched_y))
-		                        {
-		                            points.add(this.getCenterAt(touched_x, touched_y)) ;
-		                        }
+			                    if (this.canSelectNextCell(c))
+			                    {
+			                        if (this.addCell(c,(int)touched_x,(int)touched_y))
+			                        {
+			                            points.add(this.getCenterAt(touched_x, touched_y)) ;
+			                        }
+			                    }
 		                    }
 	                    }
                 	}
@@ -268,6 +270,8 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
 	            		{
 	            			c.setValue(val) ;
 	            		}
+	            		if (app.getGrille().hasWon())
+	            			app.getTv().setText("You have won") ;
 	            	}	            		
                 	points.clear();
             		selected.clear();
@@ -359,22 +363,9 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
         }        
     }
 
-    private boolean isCellTouched(int i, int j) 
-    {      
-        int posx = (int)(i / this.cellWidth)  ;
-        int posy = (int)(j / this.cellHeight) ;
-        float decX = ((float)this.cellWidth) / 3.0f ;
-        float decY = ((float)this.cellHeight) / 3.0f ;
-        Rect rect = new Rect((int)((posx * this.cellWidth) + decX),
-                             (int)((posy * this.cellHeight) + decY),
-                             (int)((posx * this.cellWidth) + (2 * decX)),
-                             (int)((posy * this.cellHeight) + (2 * decY))) ;
-        return rect.contains(i, j) ;
-    }
-    
     public void clear()
     {
-        app.setGrille(new Grille(5));
+        app.setNewGrille();
      
     }
     

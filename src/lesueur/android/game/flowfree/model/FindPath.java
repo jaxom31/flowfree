@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class FindPath {
 	
-	private ArrayList<Grille> solutions = new ArrayList<Grille>() ;
+	private ArrayList<GrilleModel> solutions = new ArrayList<GrilleModel>() ;
 	
-	public ArrayList<Case> getCasesAdjacentes(Grille g, Case c)
+	public ArrayList<Case> getCasesAdjacentes(GrilleModel g, Case c)
 	{
 		ArrayList<Case> adj = new ArrayList<Case>() ;
 		Case cc = g.getCaseHaut(c) ;
@@ -23,7 +23,7 @@ public class FindPath {
 			adj.add(cc) ;
 		return adj ;
 	}
-	public void findPath(Grille g, Case depart, Case arrivee, Case caseCourante) throws Exception
+	public void findPath(GrilleModel g, Case depart, Case arrivee, Case caseCourante) throws Exception
 	{
 		
 		ArrayList<Case> adj = this.getCasesAdjacentes(g, caseCourante) ;
@@ -46,7 +46,7 @@ public class FindPath {
 			}
 		}
 	}
-	private void addSolution(Grille copy) {
+	private void addSolution(GrilleModel copy) {
 /*		for(Grille g : this.solutions)
 		{
 			if (copy.equals(g))
@@ -55,7 +55,7 @@ public class FindPath {
 		this.solutions.add(copy) ;
 		
 	}
-	public ArrayList<Grille> getSolutions()
+	public ArrayList<GrilleModel> getSolutions()
 	{
 		return solutions ;
 	}

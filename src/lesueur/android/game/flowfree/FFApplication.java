@@ -6,7 +6,19 @@ package lesueur.android.game.flowfree;
 
 import android.app.Application;
 import android.widget.TextView;
+
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
+import xml.FlowPuzzles;
+import xml.PuzzleDecoder;
 
 /**
  * Cette classe va servir de receptacle pour les informations 
@@ -15,15 +27,41 @@ import java.util.ArrayList;
  */
 public class FFApplication extends Application
 {
-    private Grille grille = new Grille(5) ;
+    private Grille grille ;
     private TextView tv ;
-    private int mode = 0 ;
+    private int helpLevel = 1 ;
+    private ArrayList<ArrayList<Object>> models = new ArrayList<ArrayList<Object>>() ;
     
     private ArrayList<Cell> searchPath ;
     public ArrayList<Cell> getSearchPath() {
 		return searchPath;
 	}
-
+    public void onCreate()
+    {
+		String xml = "<flowpuzzles><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"red\"/><src x=\"0\" y=\"4\"/><dst x=\"1\" y=\"0\"/></line><line><colors value=\"green\"/><src x=\"2\" y=\"4\"/><dst x=\"1\" y=\"1\"/></line><line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"2\" y=\"0\"/></line><line><colors value=\"yellow\"/><src x=\"3\" y=\"1\"/><dst x=\"4\" y=\"4\"/>k </line>k <line><colors value=\"orange\"/><src x=\"3\" y=\"0\"/><dst x=\"4\" y=\"3\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"red\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"1\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"0\" y=\"1\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"green\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"2\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"1\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"bblue\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"4\"/>k </line>k <line><colors value=\"orange\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"1\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"0\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"0\" y=\"1\"/><dst x=\"1\" y=\"4\"/>k </line>k <line><colors value=\"red\"/><src x=\"2\" y=\"2\"/><dst x=\"3\" y=\"3\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"green\"/><src x=\"0\" y=\"0\"/><dst x=\"4\" y=\"4\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"1\" y=\"0\"/><dst x=\"3\" y=\"1\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"2\" y=\"0\"/><dst x=\"2\" y=\"2\"/>k </line>k <line><colors value=\"red\"/><src x=\"0\" y=\"3\"/><dst x=\"3\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"red\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"1\" y=\"3\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"4\" y=\"1\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"3\"/><dst x=\"4\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"4\"/>k </line>k <line><colors value=\"red\"/><src x=\"4\" y=\"1\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"2\"/><dst x=\"4\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"7\" height=\"7\"><line><colors value=\"yellow\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"3\"/></line><line><colors value=\"bblue\"/><src x=\"0\" y=\"1\"/><dst x=\"1\" y=\"2\"/></line><line><colors value=\"red\"/><src x=\"6\" y=\"2\"/><dst x=\"0\" y=\"6\"/></line><line><colors value=\"green\"/><src x=\"6\" y=\"1\"/><dst x=\"5\" y=\"5\"/></line><line><colors value=\"orange\"/><src x=\"0\" y=\"2\"/><dst x=\"3\" y=\"5\"/></line><line><colors value=\"white\"/><src x=\"5\" y=\"1\"/><dst x=\"5\" y=\"4\"/></line></flowpuzzle></flowpuzzles>" ;
+		FlowPuzzles fp  = null;
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db;
+		Document doc = null ;
+		try {
+			db = dbf.newDocumentBuilder();
+			doc = db.parse(new InputSource(new StringReader(xml)));
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		if (doc != null)
+		{	
+			PuzzleDecoder dec = new PuzzleDecoder(doc) ;
+			dec.startDecoding();
+			fp = dec.getRacine() ;
+		}
+		for(int i = 0 ; i < fp.getPuzzles().size() ; i++)
+		{
+				models.add(fp.getGrille(i)) ;
+		}
+		this.setNewGrille();
+    }
 	private Cell lastCell ;
     /**
      * @return the grille
@@ -37,8 +75,6 @@ public class FFApplication extends Application
      */
     public void setGrille(Grille grille) 
     {
-        
-        this.mode = 0 ;
         this.grille = grille;
     }
 
@@ -56,28 +92,6 @@ public class FFApplication extends Application
         this.tv = tv;
     }
 
-
-    /**
-     * @return the mode
-     */
-    public int getMode() {
-        return mode;
-    }
-
-    /**
-     * @param mode the mode to set
-     */
-    public void setMode(int mode) {
-        this.mode = mode;
-    }
-    
-    public void switchMode()
-    {
-        if (mode == 0)
-            mode = 1 ;
-        else
-            mode = 0 ;
-    }
         /**
      * @return the lastCell
      */
@@ -95,6 +109,19 @@ public class FFApplication extends Application
     {
         this.lastCell = lastCell;
     }
+	public void setNewGrille() {
+		Random r = new Random() ;
+		int ng = r.nextInt(this.models.size()) ;
+		Grille g = new Grille(this.models.get(ng)) ;
+		this.grille = g ;
+		helpLevel = 1 ;
+		
+	}
+	public void getHelp() 
+	{
+		if (this.helpLevel < 4)
+			this.getGrille().getHelp(this.helpLevel++) ;
+	}
 
  
 }
