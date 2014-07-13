@@ -58,27 +58,7 @@ public class Grille
         this.taille = taille ;
         grille = new Cell[taille][taille] ;
         this.initGrille();
-        this.getCellAt(0,4).setValue('1') ;
-        this.getCellAt(1,0).setValue('1') ;
-        this.getCellAt(2,4).setValue('2') ;
-        this.getCellAt(1,1).setValue('2') ; 
-        this.getCellAt(2,3).setValue('3') ;
-        this.getCellAt(2,0).setValue('3') ;
-        this.getCellAt(3,1).setValue('4') ;
-        this.getCellAt(4,4).setValue('4') ;         
-        this.getCellAt(3,0).setValue('5') ;
-        this.getCellAt(4,3).setValue('5') ;
-        
-        this.departs.add(this.getCellAt(0,4)) ;
-        this.departs.add(this.getCellAt(1,0)) ;
-        this.departs.add(this.getCellAt(2,4)) ;
-        this.departs.add(this.getCellAt(1,1)) ; 
-        this.departs.add(this.getCellAt(2,3)) ;
-        this.departs.add(this.getCellAt(2,0)) ;
-        this.departs.add(this.getCellAt(3,1)) ;
-        this.departs.add(this.getCellAt(4,4)) ; 
-        this.departs.add(this.getCellAt(3,0)) ;
-        this.departs.add(this.getCellAt(4,3)) ; 
+       
        
     }
     public ArrayList<Cell> getAjacentCells(Cell c)
@@ -139,10 +119,17 @@ public class Grille
             		grille[i][j].setValue('5') ;
             	else if (c.getColor() == 6)
             		grille[i][j].setValue('6') ;
+            	else if (c.getColor() == 7)
+            		grille[i][j].setValue('7') ;
             	else
             		grille[i][j].setValue(' ') ;
             }
-			ArrayList<ArrayList<Case>> couples = (ArrayList<ArrayList<Case>>)(defGrille.get(1)) ;
+			ArrayList<ArrayList<Case>> couples0 = (ArrayList<ArrayList<Case>>)(defGrille.get(1)) ;
+			ArrayList<ArrayList<Case>> couples = new ArrayList<ArrayList<Case>>() ;
+			for(ArrayList<Case> couple : couples0)
+			{
+				couples.add(couple) ;
+			}
 			for(ArrayList<Case> couple : couples)
 			{
 				Case c1 = couple.get(0) ;
@@ -230,6 +217,8 @@ public class Grille
     private void setPath(int numPath, char path)
     {
     	ArrayList<Cell> cellPath = new ArrayList<Cell>() ;
+    	if (solution != null)
+    	{
         for(int i = 0 ; i < grille.length ; i++)
             for(int j = 0 ; j < grille[i].length ; j++)   
             {
@@ -240,6 +229,7 @@ public class Grille
             	}
             }   	
         this.paths.add(cellPath) ;
+    	}
     }
     
 	private void removeAllCell(String path) {

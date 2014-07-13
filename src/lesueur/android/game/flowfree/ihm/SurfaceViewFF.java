@@ -85,7 +85,11 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
     	if (val.equals("4"))
     		return Color.GREEN ;
     	if (val.equals("5"))
-    		return Color.WHITE ;    	
+    		return Color.WHITE ;    
+    	if (val.equals("6"))
+    		return Color.YELLOW ;  
+    	if (val.equals("7"))
+    		return Color.CYAN ;      	
     	return  Color.BLACK ;
     }    
     

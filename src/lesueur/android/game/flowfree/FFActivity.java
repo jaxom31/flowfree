@@ -63,9 +63,13 @@ public class FFActivity extends Activity
         	app.setNewGrille() ;
             return true; 
         case R.id.help:
-        	app.getTv().setText("help 1") ;
+        	app.getTv().setText("help") ;
         	app.getHelp() ;
-            return true;                
+            return true;   
+        case R.id.exit:
+        	moveTaskToBack(true);
+        	android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         }
         return false;
     }

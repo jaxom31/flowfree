@@ -38,27 +38,46 @@ public class FFApplication extends Application
 	}
     public void onCreate()
     {
-		String xml = "<flowpuzzles><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"red\"/><src x=\"0\" y=\"4\"/><dst x=\"1\" y=\"0\"/></line><line><colors value=\"green\"/><src x=\"2\" y=\"4\"/><dst x=\"1\" y=\"1\"/></line><line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"2\" y=\"0\"/></line><line><colors value=\"yellow\"/><src x=\"3\" y=\"1\"/><dst x=\"4\" y=\"4\"/>k </line>k <line><colors value=\"orange\"/><src x=\"3\" y=\"0\"/><dst x=\"4\" y=\"3\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"red\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"1\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"0\" y=\"1\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"green\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"2\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"1\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"bblue\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"4\"/>k </line>k <line><colors value=\"orange\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"1\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"0\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"0\" y=\"1\"/><dst x=\"1\" y=\"4\"/>k </line>k <line><colors value=\"red\"/><src x=\"2\" y=\"2\"/><dst x=\"3\" y=\"3\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"green\"/><src x=\"0\" y=\"0\"/><dst x=\"4\" y=\"4\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"1\" y=\"0\"/><dst x=\"3\" y=\"1\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"2\" y=\"0\"/><dst x=\"2\" y=\"2\"/>k </line>k <line><colors value=\"red\"/><src x=\"0\" y=\"3\"/><dst x=\"3\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"red\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"yellow\"/><src x=\"1\" y=\"3\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"4\" y=\"1\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"3\"/><dst x=\"4\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"5\" height=\"5\">k <line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"0\"/>k </line>k <line><colors value=\"bblue\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"4\"/>k </line>k <line><colors value=\"red\"/><src x=\"4\" y=\"1\"/><dst x=\"3\" y=\"4\"/>k </line>k <line><colors value=\"green\"/><src x=\"3\" y=\"2\"/><dst x=\"4\" y=\"4\"/>k </line>k</flowpuzzle>k<flowpuzzle width=\"7\" height=\"7\"><line><colors value=\"yellow\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"3\"/></line><line><colors value=\"bblue\"/><src x=\"0\" y=\"1\"/><dst x=\"1\" y=\"2\"/></line><line><colors value=\"red\"/><src x=\"6\" y=\"2\"/><dst x=\"0\" y=\"6\"/></line><line><colors value=\"green\"/><src x=\"6\" y=\"1\"/><dst x=\"5\" y=\"5\"/></line><line><colors value=\"orange\"/><src x=\"0\" y=\"2\"/><dst x=\"3\" y=\"5\"/></line><line><colors value=\"white\"/><src x=\"5\" y=\"1\"/><dst x=\"5\" y=\"4\"/></line></flowpuzzle></flowpuzzles>" ;
-		FlowPuzzles fp  = null;
+    	ArrayList<String> xmlPuzzles = new ArrayList<String>() ;
+    	xmlPuzzles.add("<flowpuzzles><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"red\"/><src x=\"0\" y=\"4\"/><dst x=\"1\" y=\"0\"/></line><line><colors value=\"green\"/><src x=\"2\" y=\"4\"/><dst x=\"1\" y=\"1\"/></line><line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"2\" y=\"0\"/></line><line><colors value=\"yellow\"/><src x=\"3\" y=\"1\"/><dst x=\"4\" y=\"4\"/></line><line><colors value=\"orange\"/><src x=\"3\" y=\"0\"/><dst x=\"4\" y=\"3\"/></line></flowpuzzle><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"red\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"1\"/></line><line><colors value=\"bblue\"/><src x=\"0\" y=\"1\"/><dst x=\"4\" y=\"0\"/></line><line><colors value=\"green\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"2\"/></line><line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"1\"/></line></flowpuzzle><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"bblue\"/><src x=\"0\" y=\"0\"/><dst x=\"2\" y=\"4\"/></line><line><colors value=\"orange\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"1\"/></line><line><colors value=\"green\"/><src x=\"3\" y=\"0\"/><dst x=\"3\" y=\"4\"/></line><line><colors value=\"yellow\"/><src x=\"0\" y=\"1\"/><dst x=\"1\" y=\"4\"/></line><line><colors value=\"red\"/><src x=\"2\" y=\"2\"/><dst x=\"3\" y=\"3\"/></line></flowpuzzle><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"green\"/><src x=\"0\" y=\"0\"/><dst x=\"4\" y=\"4\"/></line><line><colors value=\"bblue\"/><src x=\"1\" y=\"0\"/><dst x=\"3\" y=\"1\"/></line><line><colors value=\"yellow\"/><src x=\"2\" y=\"0\"/><dst x=\"2\" y=\"2\"/></line><line><colors value=\"red\"/><src x=\"0\" y=\"3\"/><dst x=\"3\" y=\"4\"/></line></flowpuzzle><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"red\"/><src x=\"2\" y=\"0\"/><dst x=\"3\" y=\"4\"/></line><line><colors value=\"yellow\"/><src x=\"1\" y=\"3\"/><dst x=\"4\" y=\"0\"/></line><line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"4\" y=\"1\"/></line><line><colors value=\"green\"/><src x=\"3\" y=\"3\"/><dst x=\"4\" y=\"4\"/></line></flowpuzzle><flowpuzzle width=\"5\" height=\"5\"><line><colors value=\"yellow\"/><src x=\"0\" y=\"4\"/><dst x=\"4\" y=\"0\"/></line><line><colors value=\"bblue\"/><src x=\"1\" y=\"1\"/><dst x=\"2\" y=\"4\"/></line><line><colors value=\"red\"/><src x=\"4\" y=\"1\"/><dst x=\"3\" y=\"4\"/></line><line><colors value=\"green\"/><src x=\"3\" y=\"2\"/><dst x=\"4\" y=\"4\"/></line></flowpuzzle></flowpuzzles>") ;
+    	xmlPuzzles.add("<flowpuzzles><flowpuzzle width=\"5\" height=\"5\">" + 
+    				"<line><colors value=\"red\"/><src x=\"0\" y=\"4\"/><dst x=\"1\" y=\"0\"/></line>" + 
+    				"<line><colors value=\"green\"/><src x=\"2\" y=\"4\"/><dst x=\"1\" y=\"1\"/></line>" + 
+    				"<line><colors value=\"bblue\"/><src x=\"2\" y=\"3\"/><dst x=\"2\" y=\"0\"/></line>" + 
+    				"<line><colors value=\"yellow\"/><src x=\"3\" y=\"1\"/><dst x=\"4\" y=\"4\"/></line>" +
+    				"<line><colors value=\"orange\"/><src x=\"3\" y=\"0\"/><dst x=\"4\" y=\"3\"/></line>" +
+    				"</flowpuzzle></flowpuzzles>") ;
+    	xmlPuzzles.add("<flowpuzzles><flowpuzzle width=\"5\" height=\"5\">" + 
+				"<line><colors value=\"red\"/><src x=\"3\" y=\"3\"/><dst x=\"4\" y=\"4\"/></line>" + 
+				"<line><colors value=\"green\"/><src x=\"2\" y=\"1\"/><dst x=\"2\" y=\"3\"/></line>" + 
+				"<line><colors value=\"bblue\"/><src x=\"2\" y=\"2\"/><dst x=\"4\" y=\"0\"/></line>" + 
+				"<line><colors value=\"yellow\"/><src x=\"4\" y=\"1\"/><dst x=\"4\" y=\"3\"/></line>" +
+				"<line><colors value=\"orange\"/><src x=\"1\" y=\"1\"/><dst x=\"1\" y=\"3\"/></line>" +
+				"</flowpuzzle></flowpuzzles>") ;
+    	FlowPuzzles fp  = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;
 		Document doc = null ;
-		try {
-			db = dbf.newDocumentBuilder();
-			doc = db.parse(new InputSource(new StringReader(xml)));
-		} catch (Exception e) 
+		for(String xml : xmlPuzzles)
 		{
-			e.printStackTrace();
-		} 
-		if (doc != null)
-		{	
-			PuzzleDecoder dec = new PuzzleDecoder(doc) ;
-			dec.startDecoding();
-			fp = dec.getRacine() ;
-		}
-		for(int i = 0 ; i < fp.getPuzzles().size() ; i++)
-		{
-				models.add(fp.getGrille(i)) ;
+			try {
+				db = dbf.newDocumentBuilder();
+	
+					doc = db.parse(new InputSource(new StringReader(xml)));
+			} catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
+			if (doc != null)
+			{	
+				PuzzleDecoder dec = new PuzzleDecoder(doc) ;
+				dec.startDecoding();
+				fp = dec.getRacine() ;
+			}
+			for(int i = 0 ; i < fp.getPuzzles().size() ; i++)
+			{
+					models.add(fp.getGrille(i)) ;
+			}
 		}
 		this.setNewGrille();
     }
@@ -112,6 +131,8 @@ public class FFApplication extends Application
 	public void setNewGrille() {
 		Random r = new Random() ;
 		int ng = r.nextInt(this.models.size()) ;
+		if (this.tv != null)
+			this.tv.setText("Grille " + ng);
 		Grille g = new Grille(this.models.get(ng)) ;
 		this.grille = g ;
 		helpLevel = 1 ;

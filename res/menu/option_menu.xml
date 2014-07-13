@@ -15,11 +15,15 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/reset"
-          android:icon="@android:drawable/ic_menu_mapmode"
+          android:icon="@android:drawable/ic_menu_delete"
           android:title="Reset grid"
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/help"
-          android:icon="@android:drawable/ic_menu_mapmode"
+          android:icon="@android:drawable/ic_menu_help"
           android:title="Help"
+          android:showAsAction="ifRoom|withText" />
+        <item android:id="@+id/exit"
+          android:icon="@android:drawable/ic_menu_close_clear_cancel"
+          android:title="Exit"
           android:showAsAction="ifRoom|withText" />
 </menu>
