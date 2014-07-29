@@ -11,9 +11,12 @@ import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,15 +82,15 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
     	if (val.equals("1"))
     		return Color.RED ;
     	if (val.equals("2"))
-    		return Color.BLUE ;   	
+    		return Color.GREEN ;   	
     	if (val.equals("3"))
-    		return Color.MAGENTA ;
+    		return Color.BLUE ;
     	if (val.equals("4"))
-    		return Color.GREEN ;
+    		return Color.YELLOW ;
     	if (val.equals("5"))
-    		return Color.WHITE ;    
+    		return Color.GRAY ;    
     	if (val.equals("6"))
-    		return Color.YELLOW ;  
+    		return Color.WHITE ;  
     	if (val.equals("7"))
     		return Color.CYAN ;      	
     	return  Color.BLACK ;
@@ -339,13 +342,31 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
         threadAffichage.start();       
     }
 
-    public void surfaceChanged(SurfaceHolder holder,  int format, int width,int height) 
+    public void changeRatio()
     {
-        threadAffichage = new TGestionAffichage(getHolder(), this);
+    	WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+    	Display display = wm.getDefaultDisplay();
+    	android.graphics.Point size = new android.graphics.Point() ;
+    	display.getSize(size);
+    	int width = size.x;
+    	int height = size.y;
         int val1 = (int)((float)height / (float)(app.getGrille().getTaille())) ;
         int val2 = (int)((float)width / (float)(app.getGrille().getTaille())) ;
         this.cellHeight = Math.min(val2, val1) ;
-        this.cellWidth = this.cellHeight ;
+        this.cellWidth = this.cellHeight ;   	
+    }
+    public void changeRatio(int height, int width)
+    {
+    	
+        int val1 = (int)((float)height / (float)(app.getGrille().getTaille())) ;
+        int val2 = (int)((float)width / (float)(app.getGrille().getTaille())) ;
+        this.cellHeight = Math.min(val2, val1) ;
+        this.cellWidth = this.cellHeight ;   	
+    }
+    public void surfaceChanged(SurfaceHolder holder,  int format, int width,int height) 
+    {
+        threadAffichage = new TGestionAffichage(getHolder(), this);
+        this.changeRatio(height, width) ;
         threadAffichage.setRunning(true);
         threadAffichage.start();        
     }

@@ -28,7 +28,7 @@ public class FlowPuzzles {
 			return 5 ;		
 		if (color.equals("white"))
 			return 6 ;
-		if (color.equals("black"))
+		if (color.equals("cyan"))
 			return 7 ;
 		if (color.equals("brown"))
 			return 8 ;

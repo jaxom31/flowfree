@@ -54,6 +54,15 @@ public class FFApplication extends Application
 				"<line><colors value=\"yellow\"/><src x=\"4\" y=\"1\"/><dst x=\"4\" y=\"3\"/></line>" +
 				"<line><colors value=\"orange\"/><src x=\"1\" y=\"1\"/><dst x=\"1\" y=\"3\"/></line>" +
 				"</flowpuzzle></flowpuzzles>") ;
+    	xmlPuzzles.add("<flowpuzzles><flowpuzzle width=\"7\" height=\"7\">" + 
+				"<line><colors value=\"red\"/><src x=\"3\" y=\"3\"/><dst x=\"5\" y=\"1\"/></line>" + 
+				"<line><colors value=\"green\"/><src x=\"2\" y=\"0\"/><dst x=\"4\" y=\"3\"/></line>" + 
+				"<line><colors value=\"bblue\"/><src x=\"5\" y=\"0\"/><dst x=\"1\" y=\"6\"/></line>" + 
+				"<line><colors value=\"yellow\"/><src x=\"0\" y=\"1\"/><dst x=\"3\" y=\"2\"/></line>" +
+				"<line><colors value=\"orange\"/><src x=\"0\" y=\"6\"/><dst x=\"1\" y=\"4\"/></line>" +
+				"<line><colors value=\"white\"/><src x=\"0\" y=\"4\"/><dst x=\"5\" y=\"5\"/></line>" +
+				"<line><colors value=\"cyan\"/><src x=\"0\" y=\"0\"/><dst x=\"3\" y=\"1\"/></line>" +
+				"</flowpuzzle></flowpuzzles>") ;
     	FlowPuzzles fp  = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;

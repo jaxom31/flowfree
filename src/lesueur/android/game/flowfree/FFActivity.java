@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import lesueur.android.game.flowfree.R;
+import lesueur.android.game.flowfree.ihm.SurfaceViewFF;
 
 public class FFActivity extends Activity 
 {
@@ -61,6 +62,8 @@ public class FFActivity extends Activity
         case R.id.reset:
         	app.getTv().setText("") ;
         	app.setNewGrille() ;
+        	SurfaceViewFF sv = (SurfaceViewFF)(this.findViewById(R.id.plateau));
+        	sv.changeRatio();
             return true; 
         case R.id.help:
         	app.getTv().setText("help") ;
