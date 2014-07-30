@@ -344,14 +344,9 @@ public class SurfaceViewFF extends SurfaceView implements SurfaceHolder.Callback
 
     public void changeRatio()
     {
-    	WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-    	Display display = wm.getDefaultDisplay();
-    	android.graphics.Point size = new android.graphics.Point() ;
-    	display.getSize(size);
-    	int width = size.x;
-    	int height = size.y;
-        int val1 = (int)((float)height / (float)(app.getGrille().getTaille())) ;
-        int val2 = (int)((float)width / (float)(app.getGrille().getTaille())) ;
+    	
+        int val1 = (int)((float)(this.getHeight()) / (float)(app.getGrille().getTaille())) ;
+        int val2 = (int)((float)(this.getWidth()) / (float)(app.getGrille().getTaille())) ;
         this.cellHeight = Math.min(val2, val1) ;
         this.cellWidth = this.cellHeight ;   	
     }

@@ -95,7 +95,8 @@ public class Grille
        
     }
 
-    public Grille(ArrayList<Object> defGrille) 
+    @SuppressWarnings("unchecked")
+	public Grille(ArrayList<Object> defGrille) 
     {
 		GrilleModel g = (GrilleModel)(defGrille.get(0)) ;
 		this.taille = g.getHauteur() ;
